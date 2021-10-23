@@ -1,0 +1,25 @@
+{
+  "name": "enigma",
+  "version": "0.1.0",
+  "description": "Library replica implementation of the Enigma machine.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thepeanutguy/enigma.git"
+  },
+  "author": "Kieran Parker kieranparker91@gmail.com",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/thepeanutguy/enigma/issues"
+  },
+  "homepage": "https://github.com/thepeanutguy/enigma#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
+  }
+}
