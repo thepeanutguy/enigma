@@ -6,11 +6,10 @@ class ExtendableError extends Error {
     if (typeof Error.captureStackTrace === 'function') {
       Error.captureStackTrace(this, this.constructor);
     } else {
+      // prettier-ignore
       this.stack = (new Error(message)).stack;
     }
   }
 }
 
-export {
-  ExtendableError,
-}
+export { ExtendableError };

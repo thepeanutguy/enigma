@@ -4,7 +4,9 @@ import { CableSelfReferenceError, DuplicateCableError } from './exceptions';
 const plugboardFactory: Plugboard = (cabling) => {
   cabling.map((cable, cableIndex) => {
     if (cable.fromLetter === cable.toLatter) {
-      throw new CableSelfReferenceError(`cable "${cable.fromLetter}" cannot reference itself`);
+      throw new CableSelfReferenceError(
+        `cable "${cable.fromLetter}" cannot reference itself`,
+      );
     }
 
     cabling.map((test, testIndex) => {
@@ -13,12 +15,14 @@ const plugboardFactory: Plugboard = (cabling) => {
       }
 
       if (
-          test.fromLetter === cable.fromLetter ||
-          test.fromLetter === cable.toLatter ||
-          test.toLatter === cable.fromLetter ||
-          test.toLatter === cable.toLatter
+        test.fromLetter === cable.fromLetter ||
+        test.fromLetter === cable.toLatter ||
+        test.toLatter === cable.fromLetter ||
+        test.toLatter === cable.toLatter
       ) {
-        throw new DuplicateCableError(`cabling "${test.fromLetter}->${test.toLatter}" already exists as "${cable.fromLetter}->${cable.toLatter}"`);
+        throw new DuplicateCableError(
+          `cabling "${test.fromLetter}->${test.toLatter}" already exists as "${cable.fromLetter}->${cable.toLatter}"`,
+        );
       }
     });
   });
@@ -32,12 +36,8 @@ const plugboardFactory: Plugboard = (cabling) => {
       return letter;
     }
 
-    return cable.fromLetter === letter
-      ? cable.toLatter
-      : cable.fromLetter;
-  }
+    return cable.fromLetter === letter ? cable.toLatter : cable.fromLetter;
+  };
 };
 
-export {
-  plugboardFactory,
-}
+export { plugboardFactory };

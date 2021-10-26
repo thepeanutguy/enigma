@@ -28,27 +28,29 @@ describe('plugboard', () => {
       ${'c'} | ${'c'}
       ${'e'} | ${'s'}
       ${'s'} | ${'e'}
-    `('plugboard switches letter "$letter" to "$expected"', ({ letter, expected }) => {
-      const result = plugboard(letter);
+    `(
+      'plugboard switches letter "$letter" to "$expected"',
+      ({ letter, expected }) => {
+        const result = plugboard(letter);
 
-      expect(result).toStrictEqual(expected);
-    });
+        expect(result).toStrictEqual(expected);
+      },
+    );
   });
 
   describe('configured incorrectly', () => {
     test('exception on self-referencing cable', () => {
-      const test = () => plugboardFactory([
-        { fromLetter: 'a', toLatter: 'a' },
-      ]);
+      const test = () => plugboardFactory([{ fromLetter: 'a', toLatter: 'a' }]);
 
       expect(test).toThrow(CableSelfReferenceError);
     });
 
     test('exception on duplicate cabling', () => {
-      const test = () => plugboardFactory([
-        { fromLetter: 'a', toLatter: 'b' },
-        { fromLetter: 'b', toLatter: 'c' },
-      ]);
+      const test = () =>
+        plugboardFactory([
+          { fromLetter: 'a', toLatter: 'b' },
+          { fromLetter: 'b', toLatter: 'c' },
+        ]);
 
       expect(test).toThrow(DuplicateCableError);
     });

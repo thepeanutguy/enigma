@@ -6,7 +6,4 @@ const rotorFactory = (): string[] => {
   return Object.assign([], readOnlyRotor);
 };
 
-export {
-  readOnlyRotor,
-  rotorFactory,
-}
+export { readOnlyRotor, rotorFactory };
