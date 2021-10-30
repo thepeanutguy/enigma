@@ -1,6 +1,10 @@
 import { Plugboard } from './plugboard.interface';
 import { CableSelfReferenceError, DuplicateCableError } from './exceptions';
 
+/**
+ * @throws {CableSelfReferenceError} - a letter cannot be cabled to itself. Leave it un-cabled instead.
+ * @throws {DuplicateCableError} - two cable cannot connect to the same letter.
+ */
 const plugboardFactory: Plugboard = (cabling) => {
   cabling.map((cable, cableIndex) => {
     if (cable.fromLetter === cable.toLatter) {
