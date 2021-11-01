@@ -2,8 +2,8 @@ import { Rotor, RotorSide } from './rotor.interface';
 import { alphabet } from '../helpers/alphabet';
 import { shuffle } from '../helpers/shuffle';
 
-const rotorFactory = (shuffleFn = shuffle): Rotor => {
-  const randomAlphabet = shuffleFn(alphabet);
+const rotorFactory: Rotor = (position = shuffle) => {
+  const randomAlphabet = position(alphabet);
 
   const leftSide: RotorSide = alphabet.map((letter, index) => ({
     letter,

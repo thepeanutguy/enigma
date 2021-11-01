@@ -1,11 +1,12 @@
-import { rotorFactory } from './rotor';
+import { reflectorFactory } from './reflector';
 
-describe('rotor', () => {
+describe('reflector', () => {
   const position = <T>(arr: readonly T[]): T[] => arr as any[];
 
-  test('create a serially connected rotor', () => {
-    const result = rotorFactory(position);
-    const side = [
+  test('create a serially connected reflector', () => {
+    const reflector = reflectorFactory(position);
+
+    expect(reflector).toStrictEqual([
       { letter: 'a', wiredTo: 'a' },
       { letter: 'b', wiredTo: 'b' },
       { letter: 'c', wiredTo: 'c' },
@@ -32,11 +33,6 @@ describe('rotor', () => {
       { letter: 'x', wiredTo: 'x' },
       { letter: 'y', wiredTo: 'y' },
       { letter: 'z', wiredTo: 'z' },
-    ];
-
-    expect(result).toStrictEqual({
-      leftSide: side,
-      rightSide: side,
-    });
+    ]);
   });
 });

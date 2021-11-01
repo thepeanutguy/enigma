@@ -3,9 +3,9 @@ interface RotorPosition {
   wiredTo: string;
 }
 
+type Position = (arr: readonly string[]) => string[];
 type RotorSide = RotorPosition[];
-
-type Rotor = {
+type Rotor = (position: Position) => {
   leftSide: RotorSide;
   rightSide: RotorSide;
 };
