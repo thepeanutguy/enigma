@@ -4,6 +4,6 @@ interface PlugboardCable {
 }
 
 type Plugboard = (letter: string) => string;
-type PlugboardFactory = (cabling: PlugboardCable[]) => Plugboard
+type PlugboardFactory = (cabling: PlugboardCable[]) => Plugboard;
 
 export { PlugboardFactory, Plugboard, PlugboardCable };

@@ -1,12 +1,10 @@
 import { Enigma } from './enigma.interface';
 
 const enigma: Enigma = (plugboard, rotors, reflector) => {
-  const rotorLetter = (letter: string) => {
-
-  };
+  const rotorLetter = (letter: string) => {};
 
   const reflectLetter = (letter: string) => {
-    const index = reflector
+    const index = reflector;
   };
 
   // TODO: add support for chaining.
@@ -14,7 +12,6 @@ const enigma: Enigma = (plugboard, rotors, reflector) => {
     const plugLetterIn = plugboard(letter);
     const rotorLetterIn = rotorLetter(plugLetterIn);
 
-
-    return letter
-  }
-}
+    return letter;
+  };
+};

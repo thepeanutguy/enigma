@@ -1,5 +1,5 @@
 import { reflectorFactory, UKW, ETW } from './reflector';
-import { MissingLetterError } from "./exceptions"
+import { MissingLetterError } from './exceptions';
 
 describe('reflector', () => {
   const position = <T>(arr: readonly T[]): T[] => arr as any[];
@@ -9,12 +9,15 @@ describe('reflector', () => {
     ${'A'} | ${'A'}
     ${'M'} | ${'M'}
     ${'Z'} | ${'Z'}
-  `('serially connected reflector: $letter => $expected', ({ letter, expected }) => {
-    const reflector = reflectorFactory(position);
-    const result = reflector(letter);
+  `(
+    'serially connected reflector: $letter => $expected',
+    ({ letter, expected }) => {
+      const reflector = reflectorFactory(position);
+      const result = reflector(letter);
 
-    expect(result).toStrictEqual(expected);
-  });
+      expect(result).toStrictEqual(expected);
+    },
+  );
 
   test.each`
     letter | expected
