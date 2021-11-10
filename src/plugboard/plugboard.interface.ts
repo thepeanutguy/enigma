@@ -3,6 +3,7 @@ interface PlugboardCable {
   toLatter: string;
 }
 
-type Plugboard = (cabling: PlugboardCable[]) => (letter: string) => string;
+type Plugboard = (letter: string) => string;
+type PlugboardFactory = (cabling: PlugboardCable[]) => Plugboard
 
-export { Plugboard, PlugboardCable };
+export { PlugboardFactory, Plugboard, PlugboardCable };

@@ -1,14 +1,27 @@
 import { shuffle } from '../helpers/shuffle';
 import { alphabet } from '../helpers/alphabet';
 import { Reflector } from './reflector.interface';
+import { MissingLetterError } from "./exceptions"
 
+/**
+ * @throws {MissingLetterError} - letter does not exist in array of positions.
+ */
 const reflectorFactory: Reflector = (position = shuffle) => {
   const randomAlphabet = position(alphabet);
-
-  return alphabet.map((letter, index) => ({
-    letter,
+  const positions = alphabet.map((letter, index) => ({
+    letter: letter,
     wiredTo: randomAlphabet[index],
   }));
+
+  return (letter: string) => {
+    const position = positions.find((position) => position.letter === letter);
+
+    if (position === undefined) {
+      throw new MissingLetterError(`letter "${letter}" does not exist in array of positions`);
+    }
+
+    return position.wiredTo;
+  }
 };
 
 const UKW = reflectorFactory(() => [
@@ -39,6 +52,7 @@ const UKW = reflectorFactory(() => [
   'B',
   'L',
 ]);
+
 const ETW = reflectorFactory(() => [
   'Q',
   'W',

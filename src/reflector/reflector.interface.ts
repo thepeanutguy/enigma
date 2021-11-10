@@ -4,6 +4,6 @@ interface ReflectorPosition {
 }
 
 type Position = (arr: readonly string[]) => string[];
-type Reflector = (position: Position) => ReflectorPosition[];
+type Reflector = (position: Position) => (letter: string) => string;
 
-export { Reflector };
+export { Reflector, ReflectorPosition };

@@ -1,38 +1,47 @@
-import { reflectorFactory } from './reflector';
+import { reflectorFactory, UKW, ETW } from './reflector';
+import { MissingLetterError } from "./exceptions"
 
 describe('reflector', () => {
   const position = <T>(arr: readonly T[]): T[] => arr as any[];
 
-  test('create a serially connected reflector', () => {
+  test.each`
+    letter | expected
+    ${'A'} | ${'A'}
+    ${'M'} | ${'M'}
+    ${'Z'} | ${'Z'}
+  `('serially connected reflector: $letter => $expected', ({ letter, expected }) => {
     const reflector = reflectorFactory(position);
+    const result = reflector(letter);
 
-    expect(reflector).toStrictEqual([
-      { letter: 'a', wiredTo: 'a' },
-      { letter: 'b', wiredTo: 'b' },
-      { letter: 'c', wiredTo: 'c' },
-      { letter: 'd', wiredTo: 'd' },
-      { letter: 'e', wiredTo: 'e' },
-      { letter: 'f', wiredTo: 'f' },
-      { letter: 'g', wiredTo: 'g' },
-      { letter: 'h', wiredTo: 'h' },
-      { letter: 'i', wiredTo: 'i' },
-      { letter: 'j', wiredTo: 'j' },
-      { letter: 'k', wiredTo: 'k' },
-      { letter: 'l', wiredTo: 'l' },
-      { letter: 'm', wiredTo: 'm' },
-      { letter: 'n', wiredTo: 'n' },
-      { letter: 'o', wiredTo: 'o' },
-      { letter: 'p', wiredTo: 'p' },
-      { letter: 'q', wiredTo: 'q' },
-      { letter: 'r', wiredTo: 'r' },
-      { letter: 's', wiredTo: 's' },
-      { letter: 't', wiredTo: 't' },
-      { letter: 'u', wiredTo: 'u' },
-      { letter: 'v', wiredTo: 'v' },
-      { letter: 'w', wiredTo: 'w' },
-      { letter: 'x', wiredTo: 'x' },
-      { letter: 'y', wiredTo: 'y' },
-      { letter: 'z', wiredTo: 'z' },
-    ]);
+    expect(result).toStrictEqual(expected);
+  });
+
+  test.each`
+    letter | expected
+    ${'A'} | ${'Q'}
+    ${'M'} | ${'T'}
+    ${'Z'} | ${'L'}
+  `('UKW connected reflector: $letter => $expected', ({ letter, expected }) => {
+    const result = UKW(letter);
+
+    expect(result).toStrictEqual(expected);
+  });
+
+  test.each`
+    letter | expected
+    ${'A'} | ${'Q'}
+    ${'M'} | ${'F'}
+    ${'Z'} | ${'L'}
+  `('ETW connected reflector: $letter => $expected', ({ letter, expected }) => {
+    const result = ETW(letter);
+
+    expect(result).toStrictEqual(expected);
+  });
+
+  test('error when letter does not exist in reflector', () => {
+    const reflector = reflectorFactory(position);
+    const test = () => reflector('λ');
+
+    expect(test).toThrow(MissingLetterError);
   });
 });
